@@ -1,12 +1,12 @@
 {
   "description": "Build base Alpine Linux x86_64",
   "push": {
-    "name": "maier/alpine35",
+    "name": "dmizelle/alpine36",
     "vcs": true
   },
   "variables": {
     "atlas_user": "{{env `ATLAS_USER_NAME`}}",
-    "atlas_token": "{{env `ATLAS_TOKEN`}}",
+    "atlas_token": "{{ env `ATLAS_TOKEN` }}",
     "atlas_box": "{{env `ATLAS_BOX_NAME`}}",
     "disk_size": "10240",
     "memory": "1024",
@@ -39,13 +39,12 @@
 
       "guest_additions_mode": "disable",
       "guest_os_type": "Linux26_64",
-      "headless": false,
       "disk_size": "{{user `disk_size`}}",
       "http_directory": "http",
 
-      "iso_urls": ["isos/alpine-virt-3.6.0-x86_64.iso",
-                   "http://nl.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-virt-3.6.0-x86_64.iso"],
-      "iso_checksum": "d848fda73b8af3cc1a147320aba50e670f2eaeb1ff7fcf355eef9821f92219ca",
+      "iso_urls": ["isos/alpine-virt-3.6.2-x86_64.iso",
+                   "http://dl-cdn.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-virt-3.6.2-x86_64.iso"],
+      "iso_checksum": "92c80e151143da155fb99611ed8f0f3672fba4de228a85eb5f53bcb261bf4b0a",
       "iso_checksum_type": "sha256",
 
       "communicator": "ssh",
@@ -87,16 +86,11 @@
       "keep_input_artifact": false
     },
     {
-      "type": "atlas",
-      "only": ["virtualbox-iso"],
-      "token": "{{user `atlas_token`}}",
-      "artifact": "{{user `atlas_user`}}/{{user `atlas_box`}}",
-      "artifact_type": "vagrant.box",
-      "metadata": {
-        "provider": "virtualbox",
-        "description": "[Alpine Linux](http://alpinelinux.org) v3.6.0",
-        "version": "1.0.0"
-      }
-    }]
+      "type": "vagrant-cloud",
+      "access_token": "{{user `atlas_token`}}",
+      "box_tag": "dmizelle/alpine36",
+      "version": "3.6.2"
+    }
+    ]
   ]
 }
